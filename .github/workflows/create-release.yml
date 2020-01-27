@@ -16,8 +16,7 @@ jobs:
       - name: Build Body
         id: build_body
         run: |
-          sudo apt-get install -y gawk
-          ##[set-output name=body;] sh ./.github/workflows/create-release/build-body.sh
+          echo "##[set-output name=body;]$(sh ./.github/workflows/create-release/build-body.sh)"
       - name: Create Release
         id: create_release
         uses: actions/create-release@4d1b6075ce7561b672b8552148edec2f27584fe9
