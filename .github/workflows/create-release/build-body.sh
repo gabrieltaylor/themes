@@ -23,8 +23,8 @@
 # A link to the branch isn't valueable because they are usually
 # deleted after merging.
 #
-from_tag=$(curl --silent -H "Authorization: token ${TOKEN}" https://api.github.com/repos/${REPO}/releases/latest | jq -r .tag_name)
-to_tag=${TAG}
+from_tag=${FROM_TAG}
+to_tag=${TAG##*/}
 
 echo "## Changes"
 echo ""
