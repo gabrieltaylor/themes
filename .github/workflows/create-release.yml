@@ -11,7 +11,7 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     env:
-      REPO: ${{ github.repo }}
+      REPO: ${{ github.repository }}
       TAG: ${{ github.ref }}
       SHA: ${{ github.sha }}
     steps:
@@ -22,10 +22,6 @@ jobs:
         with:
           ref: master
       - name: Build Body
-        env:
-          REPO: ${{ github.repo }}
-          TAG: ${{ github.ref }}
-          SHA: ${{ github.sha }}
         id: build_body
         run: |
           body=$(sh ./.github/workflows/create-release/build-body.sh)

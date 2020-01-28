@@ -28,7 +28,6 @@ from_tag=${1:-$(git tag | tail -n 1)}
 to_tag=${2:-HEAD}
 
 echo "## Changes"
-
 echo ""
 echo "### PRs"
 git --no-pager log --merges --first-parent master --format='%s' ${from_tag}..${to_tag} | \
