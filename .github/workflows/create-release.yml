@@ -25,18 +25,8 @@ jobs:
           echo "::set-output name=tag_name::$tag_name"
       - name: Checkout latest release
         uses: actions/checkout@master
-        with:
-          ref: ${{ steps.get_latest.outputs.tag_name }}
-          fetch-depth: 0
-      - name: Checkout tag
-        uses: actions/checkout@master
-        with:
-          ref: master
-          fetch-depth: 0
-      - name: Checkout tag
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 0
+        run: |
+          git fetch --prune --unshallow
       - name: Build Body
         id: build_body
         env:
