@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-        with:
-          fetch-depth: 0
+        run: |
+          git fetch --prune --unshallow
       - name: Build Body
         id: build_body
         run: |
