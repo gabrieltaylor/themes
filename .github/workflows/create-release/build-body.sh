@@ -23,9 +23,8 @@
 # A link to the branch isn't valueable because they are usually
 # deleted after merging.
 #
-
-from_tag=${1:-$(git tag | tail -n 1)}
-to_tag=${2:-HEAD}
+from_tag=$(curl --silent "https://api.github.com/repos/${REPO}/releases/latest" | jq -r .tag_name)
+to_tag=${TAG}
 
 echo "## Changes"
 echo ""
@@ -40,6 +39,4 @@ git --no-pager log --merges --first-parent master --format='%s' ${from_tag}..${t
 
 echo ""
 echo "### Code Diff"
-from_sha=$(git rev-parse ${from_tag}^{})
-to_sha=$(git rev-parse ${to_tag}^{})
-echo "https://github.com/${REPO}/compare/${from_sha}..${to_sha}"
+echo "https://github.com/${REPO}/compare/${from_tag}..${to_tag}"
