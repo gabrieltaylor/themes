@@ -1,28 +1,15 @@
 #!/usr/bin/env bash
 
-# Usage
-#
-# In the service's repo, run:
-#
-#   release-notes from-ref to-ref
-#
-# Example:
-#
-#   release-notes 2019-11-08-01 2019-11-25-01
-#
-# If you leave out to-ref, it defaults to `HEAD`.  If you also leave out
-# from-ref, it defaults to the last tag.
-#
-# The output is a Markdown table with colums for the PR (with a link),
+# The output is a Markdown table with columns for the PR (with a link),
 # a branch, and JIRA ticket with link (if available).
 #
 # If the branch name starts with an id for a JIRA ticket (e.g.,
 # PLAT-123), then a link to the ticket is created.  Otherwise this
 # column is blank.
 #
-# A link to the branch isn't valueable because they are usually
+# A link to the branch isn't valuable because they are usually
 # deleted after merging.
-#
+
 from_tag=${FROM_TAG}
 to_tag=${TAG##*/}
 
