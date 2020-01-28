@@ -10,6 +10,8 @@ jobs:
   build:
     name: Create Release
     runs-on: ubuntu-latest
+    env:
+      REPO: ${{ github.repo }}
     steps:
       - name: Checkout tag
         uses: actions/checkout@master

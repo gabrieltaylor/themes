@@ -43,5 +43,4 @@ echo ""
 echo "### Code Diff"
 from_sha=$(git rev-parse ${from_tag}^{})
 to_sha=$(git rev-parse ${to_tag}^{})
-repo=${PWD##*/}
-echo "https://github.com/CityBaseInc/${repo}/compare/${from_sha}..${to_sha}"
+echo "https://github.com/${REPO}/compare/${from_sha}..${to_sha}"
