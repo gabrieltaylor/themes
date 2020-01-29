@@ -24,8 +24,10 @@ jobs:
           --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           --header "content-type: application/json" | jq -r .tag_name)
           echo "::set-output name=tag_name::$tag_name"
-      - name: Unshallow  # required for the changelog to work correctly.
-        run: git fetch --prune --unshallow
+      - name: Fetch # required for the changelog to work correctly.
+        run: git fetch --all --prune --unshallow
+      - name: Fetch tags
+        run: git fetch origin +refs/tags/*:refs/tags/*
       - name: Build Body
         id: build_body
         env:
