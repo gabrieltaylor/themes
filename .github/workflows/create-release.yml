@@ -25,7 +25,13 @@ jobs:
           --header "content-type: application/json" | jq -r .tag_name)
           echo "::set-output name=tag_name::$tag_name"
       - name: Unshallow  # required for the changelog to work correctly.
-        run: git fetch --prune --unshallow
+        run: git fetch --prune --unshallow --set-upstream
+      - name: Checkout latest release
+        run: git checkout ${{ steps.get_latest.outputs.tag_name }}
+      - name: Checkout new release
+        run: git checkout ${{ github.ref }}
+      - name: Checkout master
+        run: git checkout master
       - name: Build Body
         id: build_body
         env:
