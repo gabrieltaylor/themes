@@ -26,6 +26,8 @@ jobs:
           echo "::set-output name=tag_name::$tag_name"
       - name: Unshallow  # required for the changelog to work correctly.
         run: git fetch --prune --unshallow
+      - name: Checkout master
+        run: git checkout master
       - name: Build Body
         id: build_body
         env:
