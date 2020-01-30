@@ -43,11 +43,10 @@ jobs:
         id: create_release
         uses: actions/create-release@4d1b6075ce7561b672b8552148edec2f27584fe9
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: ${{ steps.build_body.outputs.body }}
-          draft: true
+          draft: false
           prerelease: false
