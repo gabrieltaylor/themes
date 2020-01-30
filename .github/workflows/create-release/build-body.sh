@@ -19,9 +19,9 @@ echo "### PRs"
 git --no-pager log --merges --first-parent master --format='%s' ${from_tag}..${to_tag} | \
     gawk 'BEGIN { print "| PR | Branch | Ticket |" ;
                   print "| -- | ------ | ------ |" }
-          {if (match($0,/(#[0-9]+).*CityBaseInc\/(([A-Z]+-[0-9]+)\S+)/,m))
+          {if (match($0,/(#[0-9]+).*\/(([A-Z]+-[0-9]+)\S+)/,m))
             printf "| %s | %s | [%s](https://citybase.atlassian.net/browse/%s) |\n", m[1], m[2], m[3], m[3] }
-          {if (match($0,/(#[0-9]+).*CityBaseInc\/([a-z]\S+)/,m))
+          {if (match($0,/(#[0-9]+).*\/([a-z]\S+)/,m))
             print "|", m[1], "|", m[2], "|", "|"}'
 
 echo ""
