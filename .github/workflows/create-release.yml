@@ -48,5 +48,5 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: ${{ steps.build_body.outputs.body }}
-          draft: true
+          draft: false
           prerelease: false
