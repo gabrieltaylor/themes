@@ -4,12 +4,11 @@ on:
 
 name: Deploy
 jobs:
-  deploy:
+  dispatch:
     name: Repository Dispatch
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch payload to app-state
-        uses: peter-evans/repository-dispatch@v1
+      - uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: gabrieltaylor/app-state
