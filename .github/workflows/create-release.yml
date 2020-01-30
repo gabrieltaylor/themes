@@ -13,7 +13,6 @@ jobs:
     env:
       REPO: ${{ github.repository }}
       TAG: ${{ github.ref }}
-      SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v2
       - name: Get latest release
@@ -27,7 +26,7 @@ jobs:
       - name: Fetch # required for the changelog to work correctly.
         run: git fetch --all --prune --unshallow
       - name: Fetch tags
-        run: git fetch origin +refs/tags/*:refs/tags/*
+        run: git fetch --unshallow origin +refs/tags/*:refs/tags/*
       - name: Checkout master
         run: git checkout master
       - name: Build Body
