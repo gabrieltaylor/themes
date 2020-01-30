@@ -13,4 +13,4 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: gabrieltaylor/app-state
           event-type: deploy-request
-          client-payload: '{"data": {"service_name": "graphql-service", "ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}}'
+          client-payload: '{"data": {"service_name": "graphql-service", "ref": "${{ github.ref }}", "sha": "6aea87e2055878c679a7fcfa5911f8bf1a9b46af"}}'
