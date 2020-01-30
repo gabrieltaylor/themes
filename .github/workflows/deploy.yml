@@ -1,0 +1,14 @@
+on:
+  release:
+    types: [published]
+
+name: Deploy
+jobs:
+  dispatch:
+    name: Repository Dispatch
+    uses: peter-evans/repository-dispatch@v1
+    with:
+      token: ${{ secrets.REPO_ACCESS_TOKEN }}
+      repository: gabrieltaylor/app-state
+      event-type: deploy-request
+      client-payload: '{"data": {"service_name": "graphql-service", "ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}}'
