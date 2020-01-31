@@ -11,10 +11,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Convert metadata.yml to JSON
         id: convert
-        run: |
-          snap install -y yq
-          metadata=$(yq r -j metadata.yml)
-          echo "::set-output name=metadata::$metadata"
+        uses: stefanprodan/kube-tools@v1
+        with:
+          command: |
+            metadata=$(yq r -j metadata.yml)
+            echo "::set-output name=metadata::$metadata"
       - name: Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
