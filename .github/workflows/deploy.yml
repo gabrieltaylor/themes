@@ -8,9 +8,18 @@ jobs:
     name: Repository Dispatch
     runs-on: ubuntu-latest
     steps:
-      - uses: peter-evans/repository-dispatch@v1
+      - uses: actions/checkout@v2
+      - name: Convert metadata.yml to JSON
+        id: convert
+        uses: stefanprodan/kube-tools@v1
+        with:
+          command: |
+            metadata=$(yq r -j metadata.yml)
+            echo "::set-output name=metadata::$metadata"
+      - name: Dispatch
+        uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: gabrieltaylor/app-state
           event-type: deploy-request
-          client-payload: '{"data": {"service_name": "graphql-service", "ref": "${{ github.ref }}", "sha": "6aea87e2055878c679a7fcfa5911f8bf1a9b46af"}}'
+          client-payload: '{"data": {"variables": ${{ steps.conver.outputs.metadata }}, "ref": "${{ github.ref }}", "sha": "6aea87e2055878c679a7fcfa5911f8bf1a9b46af"}}'
