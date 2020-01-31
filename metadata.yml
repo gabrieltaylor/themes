@@ -1,12 +1,12 @@
 name: graphql-service
 
+application_name: graphql_service
+
 description: "Primary public GraphQL schema"
 
 owner: treasury
 
 pagerDutyKey: "IT Operations Escalation Policy"
-
-airbrakeKey: 231107
 
 slackChannel: treasury-dev
 
@@ -20,17 +20,16 @@ internalDependencies:
 
 publicFacing: false
 
-argo:
-  prod:
-    - "https://argocd.ops.cityba.se/applications/graphql-service-prod?proj=prod"
+exception_monitoring:
+  prod: "https://citybase.airbrake.io/projects/231107?filters=%7B%22order%22%3A%22last_notice%22%2C%22resolved%22%3A%22false%22%2C%22context.environment%22%3A%22992466704958690609%22%7D"
+
+kubernetes:
+  prod: "https://argocd.ops.cityba.se/applications/graphql-service-prod?proj=prod"
 
 logs:
-  prod:
-    - "https://logs.prod.cityba.se/_plugin/kibana/app/kibana#/discover?_g=(refreshInterval:('$$hashKey':'object:11543',display:'5%20seconds',pause:!t,section:1,value:5000),time:(from:now-4h,mode:quick,to:now))&_a=(columns:!(_source),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'9e494b50-9d0d-11e9-ade9-913b8e3e21f1',key:kubernetes.container.name,negate:!f,params:(query:graphql-service,type:phrase),type:phrase,value:graphql-service),query:(match:(kubernetes.container.name:(query:graphql-service,type:phrase))))),index:'9e494b50-9d0d-11e9-ade9-913b8e3e21f1',interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
-  uat:
-    - "https://logs.uat.cityba.se/_plugin/kibana/app/kibana#/discover?_g=()&_a=(columns:!(message),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',key:kubernetes.container.name,negate:!f,params:(query:graphql-service,type:phrase),type:phrase,value:graphql-service),query:(match:(kubernetes.container.name:(query:graphql-service,type:phrase))))),index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
-  dev:
-    - "https://logs.dev.cityba.se/_plugin/kibana/app/kibana#/discover?_g=()&_a=(columns:!(message),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',key:kubernetes.container.name,negate:!f,params:(query:graphql-service,type:phrase),type:phrase,value:graphql-service),query:(match:(kubernetes.container.name:(query:graphql-service,type:phrase))))),index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
+  prod: "https://logs.prod.cityba.se/_plugin/kibana/app/kibana#/discover?_g=(refreshInterval:('$$hashKey':'object:11543',display:'5%20seconds',pause:!t,section:1,value:5000),time:(from:now-4h,mode:quick,to:now))&_a=(columns:!(_source),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'9e494b50-9d0d-11e9-ade9-913b8e3e21f1',key:kubernetes.container.name,negate:!f,params:(query:graphql-service,type:phrase),type:phrase,value:graphql-service),query:(match:(kubernetes.container.name:(query:graphql-service,type:phrase))))),index:'9e494b50-9d0d-11e9-ade9-913b8e3e21f1',interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
+  uat: "https://logs.uat.cityba.se/_plugin/kibana/app/kibana#/discover?_g=()&_a=(columns:!(message),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',key:kubernetes.container.name,negate:!f,params:(query:graphql-service,type:phrase),type:phrase,value:graphql-service),query:(match:(kubernetes.container.name:(query:graphql-service,type:phrase))))),index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
+  dev: "https://logs.dev.cityba.se/_plugin/kibana/app/kibana#/discover?_g=()&_a=(columns:!(message),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',key:kubernetes.container.name,negate:!f,params:(query:graphql-service,type:phrase),type:phrase,value:graphql-service),query:(match:(kubernetes.container.name:(query:graphql-service,type:phrase))))),index:'54a9bea0-9cf2-11e9-aea0-f9bc429f6626',interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))"
 
 dashboards:
   prod:

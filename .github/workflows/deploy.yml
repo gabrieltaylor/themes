@@ -22,4 +22,4 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: gabrieltaylor/app-state
           event-type: deploy-request
-          client-payload: '{"data": {"variables": ${{ steps.convert.outputs.metadata }}, "ref": "${{ github.ref }}", "sha": "6aea87e2055878c679a7fcfa5911f8bf1a9b46af"}}'
+          client-payload: '{"data": {"service": ${{ steps.convert.outputs.metadata }}, "ref": "${{ github.ref }}", "sha": "070f5f096c6e795361ac11e71441303c8615dee6"}}'
