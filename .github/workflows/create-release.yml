@@ -13,6 +13,7 @@ jobs:
     env:
       REPO: ${{ github.repository }}
       TAG: ${{ github.ref }}
+      SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v2
       - name: Get latest release
@@ -23,9 +24,18 @@ jobs:
           --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           --header "content-type: application/json")
           tag_name=$(echo $release | jq -r .tag_name)
-          author=$(echo $release | jq -r .author.login)
           echo "::set-output name=tag_name::$tag_name"
-          echo "::set-output name=author::$author"
+      - name: Get tag author
+        id: get_author
+        run: |
+          tag=$(curl --silent --request GET \
+          --url https://api.github.com/repos/${{ github.repository }}/git/tags/${SHA} \
+          --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          --header "content-type: application/json")
+          author_name=$(echo $tag | jq -r .tagger.name)
+          author_email=$(echo $tag | jq -r .tagger.email)
+          echo "::set-output name=author_name::$author_name"
+          echo "::set-output name=author_email::$author_email"
       - name: Fetch # required for the changelog to work correctly.
         run: git fetch --all --prune --unshallow
       - name: Fetch tags
@@ -36,7 +46,8 @@ jobs:
         id: build_body
         env:
           FROM_TAG: ${{ steps.get_latest.outputs.tag_name }}
-          AUTHOR: ${{ steps.get_latest.outputs.author }}
+          AUTHOR_NAME: ${{ steps.get_author.outputs.author_name }}
+          AUTHOR_EMAIL: ${{ steps.get_author.outputs.author_email }}
         run: |
           body=$(sh ./.github/workflows/create-release/build-body.sh)
           body="${body//'%'/'%25'}"
