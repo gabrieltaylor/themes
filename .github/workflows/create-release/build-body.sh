@@ -27,3 +27,6 @@ git --no-pager log --merges --first-parent master --format='%s' ${from_tag}..${t
 echo ""
 echo "### Code Diff"
 echo "https://github.com/${REPO}/compare/${from_tag}..${to_tag}"
+echo ""
+echo "### Release Initiator"
+echo "[${AUTHOR}](https://github.com/${AUTHOR})"
