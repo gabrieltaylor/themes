@@ -32,6 +32,7 @@ jobs:
           --url https://api.github.com/repos/${{ github.repository }}/git/tags/${SHA} \
           --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           --header "content-type: application/json")
+          echo $tag
           author_name=$(echo $tag | jq -r .tagger.name)
           author_email=$(echo $tag | jq -r .tagger.email)
           echo "::set-output name=author_name::$author_name"
