@@ -1,16 +1,11 @@
 name: automerge
 on:
   pull_request:
-    branches-ignore:
-      - master
     types:
       - labeled
-      - unlabeled
       - synchronize
-      - opened
       - edited
       - ready_for_review
-      - reopened
       - unlocked
   pull_request_review:
     types:
@@ -19,8 +14,11 @@ on:
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'automerge') || (github.event.status.state == 'success' && !contains(github.event.status.branches.*.name, 'master')) || contains(github.event.pull_request_review.pull_request.labels.*.name, 'automerge')
     steps:
       - name: automerge
         uses: "pascalgn/automerge-action@43fd7e11ee532218966343a262f10771b5eff978"
+        with:
+          args: "--trace"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
