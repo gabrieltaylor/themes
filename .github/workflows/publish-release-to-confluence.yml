@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Publish release notes to Confluence
-        uses: gabrieltaylor/publish-to-confluence@26f584768b8faa3785d3d152a156232766d7c068
+        uses: gabrieltaylor/publish-to-confluence@master
         env:
           CONFLUENCE_API_TOKEN: ${{ secrets.CONFLUENCE_API_TOKEN }}
         with:
