@@ -16,6 +16,7 @@ jobs:
           type: 'page'
           title: ${{ github.event.release.name }}
           body: ${{ github.event.release.body }}
+          parent_id: '98319'
           space: 'RM'
           hostname: 'github-actions-test.atlassian.net'
           username: 'gtaylorruss@thecitybase.com'
